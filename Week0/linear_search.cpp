@@ -9,13 +9,13 @@ void linear(vector<int>arr, int n, int num)
     {
         if(arr[i] == num)
         {
-            cout<<"Present"<<i+1<<endl;
+            cout<<"Element found at "<<i+1<<"index"<<endl;
             flag = true;
             break;
         }
     }
     if(!flag)
-      cout<<"Not Present"<<i+1<<endl;
+      cout<<"Element not found"<<i+1<<endl;
 
 }
 int main()
