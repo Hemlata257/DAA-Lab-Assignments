@@ -5,31 +5,35 @@
 using namespace std;
 void jump(vector<int> arr, int n, int num)
 {
-    int j = sqrt(n);
+    int j = floor(sqrt(n));
+    int steps = j;
     bool flag = false;
     int prev = 0, i, k,c=0;
-    for( i = 0;arr[i]<=num;i = i+j)
+    while(arr[min(steps,n)-1]<num)
     {
-        c++;
-        if(arr[i]>num||i>=n)
-          break;
-        prev = i;  
-        
+      c++;
+      prev = steps ;
+      steps+= j;
+      if(prev>=n)
+         break;
+    } 
+    while(arr[prev]<num)
+    {
+      c++;
+      prev++;
+      if(prev == min(steps,n))
+         break;
     }
-    for(k = prev; k<=i; k++)
-     {
+    if(arr[prev]==num)
+       {
          c++;
-        if(arr[k] == num)
-         {
-            cout<<"Present"<<c;
-            flag = true;
-            break;
-        }
-        if(arr[k]>num)
-          break;         
-    }
+         flag = true;
+       }
     if(!flag)
-     cout<<"Not Present"<<c;
+      cout<<"Not Present "<<c<<endl;  
+    else
+      cout<<"Present "<<c<<endl;  
+
 }
 int main()
 {
