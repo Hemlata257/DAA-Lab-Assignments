@@ -1,53 +1,46 @@
+//Sorting an unsorted array using insertion sort
 #include<iostream>
+#include<vector>
 using namespace std;
-int  search(int arr[], int n, int key, bool flag)
+void insertion(vector<int> arr, int n)
 {
-     int l = 0, r = n-1,res = -1; 
-
-    while(l<=r)
+    int shift = 0, comp = 0; 
+    for(int i = 1;i<n;i++)
     {
-        
-        int mid = l + (r-l)/2;
-        
-        if(arr[mid] == key) 
-          {
-              res = mid;
-              if(flag == true)
-                r = mid-1;
-              else
-                l = mid+1;  
-          }
-        else{
-            if(arr[mid]<key)
-              l = mid+1;
-            else
-              r = mid-1;  
-        }   
-        
+        int t = arr[i];
+        int j = i-1;
+        while(j>=0 && arr[j]>t)
+        {
+            comp++;
+            shift++;
+            arr[j+1] = arr[j];
+            j = j-1;   
+            arr[j+1] = t;            
+        }
+        if(i-j>=2)
+          shift++;
+        if(j>=0)  
+          comp++;
     }
-    return res;
+    for(int i = 0; i<n; i++)
+           cout<<arr[i]<<" ";
+    cout<<"\n"<<"comparisons- "<<comp<<endl;
+    cout<<"shift- "<<shift<<endl;       
+
 
 }
- int main()
+int main()
 {
     int t ;
     cin>>t;
     while(t>0)
     {
-        int n = 0;
+        int n =0;
         cin>>n;
-        int arr[n];
+        vector<int> arr(n);
         for(int i=0;i<n;i++)
           cin>>arr[i];
-        int key;
-        cin>>key;
-   int first = search(arr,n,key, true);
-   if(first==-1)
-      cout<<"Not Present";
-    else{
-        int last = search(arr,n , key,false);
-        cout<<key<<" - "<<(last-first +1)<<endl;;
-    }  
+        insertion(arr,n);
         t--;
     }
 }
