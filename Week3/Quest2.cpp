@@ -1,25 +1,31 @@
+//Sorting an unsorted array using selection sort
 #include<iostream>
 #include<vector>
 using namespace std;
-int search( vector<int> arr, int l , int r , int key)
+void selection(vector<int> arr, int n)
 {
-
-    while(l<=r)
+    int comp =0, shift =0;
+    for(int i =0;i<n-1;i++)
     {
-        int mid = l + (r-l)/2;
-        if(arr[mid] == key) 
-          {
-            return mid;
-          }
-        else{
-           
-            if(arr[mid]<key)
-              l = mid+1;
-            else
-              r = mid-1;  
-        }   
+        int min =i;
+        for(int j = i+1;j<n;j++)
+        {
+            if(arr[j]<arr[min])
+            {
+                min = j;
+            }
+            comp++;
+        }
+              shift++;
+                int temp = arr[i];
+                arr[i] = arr[min];
+                arr[min] = temp;
+            
     }
-    return -1;
+    for(int i =0;i<n;i++)
+       cout<<arr[i]<<" ";
+    cout<<"\n"<<"comparisons- "<<comp<<endl;
+    cout<<"shift- "<<shift<<endl;      
 
 }
 int main()
@@ -28,30 +34,12 @@ int main()
     cin>>t;
     while(t>0)
     {
-        int n = 0;
+        int n =0;
         cin>>n;
         vector<int> arr(n);
         for(int i=0;i<n;i++)
           cin>>arr[i];
-         int i,j,idx=-1;
-         
-        for( i = 0 , j =i+1; i < n-1 ;)
-        {
-          idx = search(arr ,j , n-1 , arr[i]+arr[j]);
-           if(idx!= -1)
-            {
-                cout<<i+1<<" "<<j+1<<" "<<idx+1<<" "<<endl;
-                break;
-            }
-           j++; 
-           if(j==n)
-              {
-                  i++;
-                  j = i+1;
-              } 
-        }
-        if(idx == -1)
-          cout<<"Not Present "<<endl;
+        selection(arr,n);
         t--;
     }
 }
