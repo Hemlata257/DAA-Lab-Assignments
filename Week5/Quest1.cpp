@@ -29,7 +29,6 @@ int main()
     cin>>t;
     while(t>0)
     {
-        
         string str;
         int n;
         cin>>n;
